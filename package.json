@@ -20,6 +20,7 @@
     "dotenv": "^16.4.7",
     "expo": "~52.0.28",
     "expo-status-bar": "~2.0.1",
+    "metro-runtime": "^0.81.1",
     "next": "^15.1.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
