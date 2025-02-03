@@ -1,0 +1,79 @@
+codeQuality:
+  - rule: "ensure exports where necessary"
+    priority: high
+    description: "Use proper exports for all components that need to be accessible from other files"
+
+  - rule: "maintain typescript type safety"
+    priority: high
+    description: "Ensure strict typing and avoid any 'any' types where possible"
+
+  - rule: "ensure consistent code formatting"
+    priority: high
+    description: "Follow project's style guide and formatting rules"
+    details:
+      - "Use consistent indentation"
+      - "Follow naming conventions for variables, functions, and files"
+      - "Maintain consistent spacing and line breaks"
+      - "Use proper code organization within files"
+
+architecture:
+  - rule: "use best practice patterns"
+    priority: high
+    description: "Implement types/interfaces, repositories and services"
+    note: "avoid over-engineering and unnecessary complexity"
+
+  - rule: "ensure separation of concerns"
+    priority: high
+    description: "Keep code modular and maintain clear boundaries between different responsibilities"
+    details:
+      - "Separate business logic from data access"
+      - "Keep UI components focused on presentation"
+      - "Use proper layering (e.g., controllers, services, repositories)"
+      - "Avoid mixing different levels of abstraction"
+
+  - rule: "ensure compliance with project patterns"
+    priority: high
+    description: "Follow established project conventions and patterns"
+    details:
+      - "Use consistent file and folder structure"
+      - "Follow agreed-upon naming conventions"
+      - "Implement standard error handling patterns"
+      - "Use project-specific architectural patterns"
+
+performance:
+  - rule: "ensure efficient data structures"
+    priority: medium
+    description: "Choose appropriate data structures for optimal performance"
+    details:
+      - "Use Sets for unique collections"
+      - "Use Maps for key-value relationships"
+      - "Consider memory usage and access patterns"
+      - "Avoid unnecessary data copying"
+
+  - rule: "implement proper caching"
+    priority: medium
+    description: "Use caching where it provides meaningful performance benefits"
+    details:
+      - "Cache expensive computations"
+      - "Implement cache invalidation strategies"
+      - "Use memoization where appropriate"
+      - "Consider memory constraints"
+
+  - rule: "handle async operations properly"
+    priority: high
+    description: "Implement robust async operation handling"
+    details:
+      - "Use async/await consistently"
+      - "Implement proper error handling for async operations"
+      - "Consider parallel execution where beneficial"
+      - "Avoid unnecessary async operations"
+
+development:
+  - rule: "verify information before implementation"
+    priority: medium
+    description: "Ask for clarification instead of making assumptions when additional information is needed"
+
+documentation:
+  - rule: "provide complete code"
+    priority: mandatory
+    description: "Always provide full file content instead of partial code snippets when suggesting changes"
