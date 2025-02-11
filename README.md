@@ -81,10 +81,35 @@ These variables are used by the Supabase service defined in `src/services/supaba
 
 ### Auth Providers Configuration
 
-You can configure which authentication providers are enabled in `src/config/auth.config.ts`. For example:
+The authentication providers and features are configured in `src/config/auth.config.ts`. For example:
 
-- **Email Provider:** Set `enabled` to `true` or `false`.
-- **Google Provider:** Set `enabled` to `true` to enable Google OAuth. Make sure to set the `clientId` and `redirectUrl` from your Google project.
+- **Email Provider:**  
+  Set `enabled` to `true` or `false` to enable/disable email login.
+
+- **Google Provider (OAuth):**  
+  Set `enabled` to `true` to enable Google OAuth. Make sure to supply the Google client ID and redirect URL.  
+
+  #### How to Set Up Google OAuth:
+  
+  1. **Create a Project in Google Cloud Console:**  
+     Visit [Google Cloud Console](https://console.cloud.google.com/) and create a new project.
+  
+  2. **Configure OAuth Credentials:**  
+     Navigate to **APIs & Services > Credentials** and create an OAuth client ID.  
+     - Select **Web application** (for web-based apps) or the appropriate application type.
+     - Add your Supabase redirect URL (typically in the form `https://<your-supabase-project>.supabase.co/auth/v1/callback`) to the **Authorized redirect URIs**.
+  
+  3. **Obtain Client ID and Secret:**  
+     Copy the client ID (and secret if needed) from your Google Cloud project.
+  
+  4. **Configure in Your Project:**  
+     In `src/config/auth.config.ts`, set the Google provider’s `clientId` and `redirectUrl` (which can be read from environment variables such as `EXPO_PUBLIC_GOOGLE_CLIENT_ID` and `EXPO_PUBLIC_GOOGLE_REDIRECT_URI`).
+  
+  5. **Enable Google OAuth in Supabase:**  
+     In your Supabase project, enable Google OAuth and provide the client ID and secret from your Google Cloud project.
+  
+  6. **Tutorial:**  
+     For a detailed guide, check out this [YouTube tutorial](https://www.youtube.com/watch?v=dE2vtnv83Fc).
 
 The configuration also lets you toggle features like registration, password reset, and account deletion, as well as customize UI settings (e.g., primary color and dark mode).
 
@@ -116,15 +141,15 @@ npm run web
 
 ### Authentication Flow
 
-- **Login Screen:** Located at `src/screens/auth/LoginScreen.tsx`. Supports email login and Google OAuth (if enabled in the configuration).
+- **Login Screen:** Located at `src/screens/auth/LoginScreen.tsx`. Supports email login and Google OAuth (if enabled).
 - **Register Screen:** Located at `src/screens/auth/RegisterScreen.tsx`. Allows new users to sign up using email.
-- **User Profile:** Managed by `src/screens/UserProfile/UserProfileScreen.tsx` where users can view their profile, sign out, or delete their account (if the feature is enabled).
+- **User Profile:** Managed by `src/screens/UserProfile/UserProfileScreen.tsx` where users can view their profile, sign out, or delete their account (if enabled).
 
 ## Local Development
 
 ### Option 1: Separate Server Wrapper
 
-If you prefer to have a separate file for starting the local server, create a file named `src/server.ts` (or within another suitable folder) with the following content:
+If you prefer a separate file for starting a local server, create a file named `src/server.ts` (or in another suitable folder) with the following content:
 
 ```typescript
 // src/server.ts
@@ -133,17 +158,17 @@ import { registerRootComponent } from 'expo';
 
 const PORT = process.env.PORT || 3000;
 
-// For local testing, you can register the root component with Expo's AppRegistry:
+// For local testing, register the root component with Expo's AppRegistry:
 registerRootComponent(App);
 
-// If you need to create an HTTP server manually (for web testing), you can set up Express here.
+// (Optional) You can set up an HTTP server manually here if needed.
 ```
 
 *Note:* Most Expo projects are started using the Expo CLI, so you typically run the app with Expo rather than starting an Express server manually.
 
 ### Option 2: Using Expo CLI
 
-Since this template uses Expo, you generally start the project with Expo CLI:
+Since this template uses Expo, you generally start the project with the Expo CLI:
 
 ```bash
 npm start
@@ -153,22 +178,22 @@ This will open the Expo developer tools in your browser. From there, you can lau
 
 ### Testing Supabase Integration
 
-Ensure your `.env` file contains valid values for Supabase. If you’d like to disable Supabase (for initial testing without authentication), you can remove or leave the Supabase variables empty. Adjust your configuration in `src/config/auth.config.ts` accordingly if needed.
+Ensure your `.env` file contains valid values for Supabase. If you’d like to disable Supabase (for initial testing without authentication), remove or leave the Supabase variables empty and adjust the configuration in `src/config/auth.config.ts` accordingly.
 
 ## Additional Notes
 
 - **Supabase Integration:**  
-  The Supabase client is set up in `src/services/supabase.ts`. Make sure your environment variables are correctly configured.
+  The Supabase client is set up in `src/services/supabase.ts`. Ensure your environment variables are correctly configured.
   
 - **Expo and Metro:**  
   The template uses Expo with Metro runtime. If needed, you can install additional packages:
   ```bash
   npm install @expo/metro-runtime metro-runtime
   ```
-
+  
 - **Navigation:**  
   The app uses React Navigation. Navigation is configured in `App.tsx` with stack and tab navigators.
-
+  
 - **Customization:**  
   Feel free to modify the configuration in `src/config/auth.config.ts` and adjust the folder structure as needed for your project.
 
@@ -176,3 +201,5 @@ Ensure your `.env` file contains valid values for Supabase. If you’d like to d
 
 This project is licensed under the MIT License.
 ````markdown
+
+Simply copy the entire block above (including the triple backticks) into your `README.md` file.
