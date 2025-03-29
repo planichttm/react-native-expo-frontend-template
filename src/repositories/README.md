@@ -1,0 +1,3 @@
+# Repositories Layer
+
+Repositories are responsible for directly communicating with external data sources such as APIs, databases, or local storage. They abstract the data access logic and provide a clean interface for fetching and manipulating data without exposing the underlying implementation details. Repositories should not contain any business logic or data transformation beyond what's necessary for communication with data sources.

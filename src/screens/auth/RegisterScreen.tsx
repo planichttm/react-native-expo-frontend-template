@@ -1,10 +1,13 @@
+// src/screens/auth/RegisterScreen.tsx
 import { useState } from 'react';
-import { View, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { View } from 'react-native';
 import { Input, Button, Text } from '@rneui/themed';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthStackParamList } from '../../../App';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import { authStyles } from '../../styles/screens/auth.styles';
+import { authConfig } from '../../config/auth.config';
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Register'>;
 
@@ -34,57 +37,51 @@ const RegisterScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text h3 style={styles.title}>Register</Text>
+    <View style={[
+      authStyles.container,
+      { backgroundColor: authConfig.ui.darkMode ? '#1a202c' : '#ffffff' }
+    ]}>
+      <Text h3 style={[
+        authStyles.title,
+        { color: authConfig.ui.darkMode ? '#ffffff' : '#000000' }
+      ]}>Register</Text>
+      
       <Input
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         disabled={isLoading}
+        containerStyle={authStyles.inputContainer}
       />
+      
       <Input
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         disabled={isLoading}
+        containerStyle={authStyles.inputContainer}
       />
+      
       <Button
         title="Register"
         onPress={handleRegister}
         loading={isLoading}
-        containerStyle={styles.buttonContainer}
+        containerStyle={authStyles.buttonContainer}
+        buttonStyle={{ backgroundColor: authConfig.ui.primaryColor }}
       />
+      
       <Button
         title="Back to Login"
         type="clear"
         onPress={() => navigation.goBack()}
         disabled={isLoading}
+        titleStyle={{ color: authConfig.ui.primaryColor }}
+        containerStyle={authStyles.buttonContainer}
       />
     </View>
   );
 };
-
-interface Styles {
-  container: ViewStyle;
-  title: TextStyle;
-  buttonContainer: ViewStyle;
-}
-
-const styles = StyleSheet.create<Styles>({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-  },
-  title: {
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  buttonContainer: {
-    marginVertical: 10,
-  }
-});
 
 export default RegisterScreen;

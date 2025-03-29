@@ -1,0 +1,3 @@
+# Services Layer
+
+Services encapsulate basic data processing, manipulation, and coordinate with repositories to access data. They provide simple transformations and utilities that can be reused across different use cases, acting as a bridge between repositories and the domain layer. Services should contain only simple processing logic and avoid complex business rules or orchestration of multiple service calls.

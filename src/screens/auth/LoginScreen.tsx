@@ -1,6 +1,6 @@
 // src/screens/auth/LoginScreen.tsx
 import { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Input, Button, Text } from '@rneui/themed';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthStackParamList, RootStackParamList } from '../../../App';
@@ -9,6 +9,7 @@ import { CompositeNavigationProp, useNavigation } from '@react-navigation/native
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { authConfig, isProviderEnabled, isFeatureEnabled } from '../../config/auth.config';
 import { supabase } from '../../services/supabase';
+import { authStyles } from '../../styles/screens/auth.styles';
 
 type LoginScreenNavigationProp = CompositeNavigationProp<
   NativeStackNavigationProp<AuthStackParamList, 'Login'>,
@@ -67,11 +68,11 @@ const LoginScreen = () => {
 
   return (
     <View style={[
-      styles.container, 
+      authStyles.container, 
       { backgroundColor: authConfig.ui.darkMode ? '#1a202c' : '#ffffff' }
     ]}>
       <Text h3 style={[
-        styles.title,
+        authStyles.title,
         { color: authConfig.ui.darkMode ? '#ffffff' : '#000000' }
       ]}>Login</Text>
 
@@ -83,6 +84,7 @@ const LoginScreen = () => {
             onChangeText={setEmail}
             autoCapitalize="none"
             disabled={isLoading}
+            containerStyle={authStyles.inputContainer}
           />
           <Input
             placeholder="Password"
@@ -90,12 +92,13 @@ const LoginScreen = () => {
             onChangeText={setPassword}
             secureTextEntry
             disabled={isLoading}
+            containerStyle={authStyles.inputContainer}
           />
           <Button
             title="Login"
             onPress={handleEmailLogin}
             loading={isLoading}
-            containerStyle={styles.buttonContainer}
+            containerStyle={authStyles.buttonContainer}
             buttonStyle={{ backgroundColor: authConfig.ui.primaryColor }}
           />
           {isFeatureEnabled('registration') && (
@@ -105,6 +108,7 @@ const LoginScreen = () => {
               onPress={() => navigation.navigate('Register')}
               disabled={isLoading}
               titleStyle={{ color: authConfig.ui.primaryColor }}
+              containerStyle={authStyles.buttonContainer}
             />
           )}
         </>
@@ -120,37 +124,15 @@ const LoginScreen = () => {
               name="google"
               size={20}
               color="white"
-              style={styles.googleIcon}
+              style={authStyles.googleIcon}
             />
           }
-          buttonStyle={styles.googleButton}
-          containerStyle={styles.buttonContainer}
+          buttonStyle={[authStyles.socialButton, authStyles.googleButton]}
+          containerStyle={authStyles.buttonContainer}
         />
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-  },
-  title: {
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  buttonContainer: {
-    marginVertical: 10,
-  },
-  googleButton: {
-    backgroundColor: '#4285F4',
-    padding: 15,
-  },
-  googleIcon: {
-    marginRight: 10,
-  }
-});
 
 export default LoginScreen;
