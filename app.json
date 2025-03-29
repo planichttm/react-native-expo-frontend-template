@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "token-comparison-frontend",
-    "slug": "token-comparison-frontend",
+    "name": "react-native-web-nextjs-template",
+    "slug": "react-native-web-nextjs-template",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
