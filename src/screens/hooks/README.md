@@ -1,0 +1,3 @@
+# Screen Hooks Layer
+
+Screen Hooks manage UI state and mediate between the Use Cases and the UI components. They handle UI-specific concerns like loading states, error handling, and data formatting for presentation, while delegating business logic to the Use Cases layer. Screen Hooks should remain focused on screen-specific state management and UI logic, avoiding business logic that belongs in the Use Cases layer.
